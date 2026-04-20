@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DropShare</title>
+    <meta name="description" content="DropShare is a fast and easy file sharing app for Android. Transfer files on your local network, access your device from a web browser, and manage sharing with simple controls.">
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #5e6b85;
+            --accent: #1769ff;
+            --accent-hover: #0f53cd;
+            --border: #dce4f2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top right, #dbe8ff 0, transparent 28%),
+                linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+        }
+
+        .wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 760px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 24px 60px rgba(23, 32, 51, 0.08);
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 2.4rem;
+            line-height: 1.1;
+        }
+
+        p {
+            margin: 0 0 16px;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--muted);
+        }
+
+        .features {
+            margin: 24px 0 32px;
+            padding-left: 20px;
+            color: var(--text);
+        }
+
+        .features li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .cta {
+            display: inline-block;
+            padding: 14px 22px;
+            border-radius: 12px;
+            background: var(--accent);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .cta:hover {
+            background: var(--accent-hover);
+        }
+
+        .note {
+            margin-top: 18px;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 28px 22px;
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <section class="card">
+            <h1>DropShare</h1>
+            <p>
+                DropShare is an Android app designed for fast, simple, and private file sharing on your local network.
+                It helps you move files between your phone, tablet, and computer without relying on cloud uploads.
+            </p>
+            <p>
+                With DropShare, you can browse files from a web browser, share content across devices on the same network,
+                and keep control of access with flexible server and permission settings.
+            </p>
+
+            <ul class="features">
+                <li>Fast local file transfer between Android devices and desktop browsers</li>
+                <li>Built-in web access for easy downloads and uploads</li>
+                <li>Flexible sharing controls, permissions, and server options</li>
+                <li>Simple setup for everyday file exchange at home, work, or school</li>
+            </ul>
+
+            <a class="cta" href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">
+                Download on Google Play
+            </a>
+
+            <p class="note">
+                Google Play: https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop
+            </p>
+        </section>
+    </main>
+</body>
+</html>
