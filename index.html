@@ -15,7 +15,6 @@
   <link rel="icon" type="image/png" href="images/web_hi_res_512.png" />
   <link rel="apple-touch-icon" href="images/web_hi_res_512.png" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="DropShare - Chat-Based File & Text Sharing Tool" />
   <meta property="og:description" content="Transfer files, text, and links instantly across devices with a simple chat-style experience and support for HTTP, WebDAV, FTP, and SFTP." />
@@ -25,16 +24,11 @@
   <meta property="og:image:width" content="1536" />
   <meta property="og:image:height" content="1024" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="DropShare - Chat-Based File & Text Sharing Tool" />
   <meta name="twitter:description" content="Chat-based file and text sharing across devices with browser access and multiple transfer protocols." />
   <meta name="twitter:image" content="https://eagle518-hub.github.io/images/img_dropshare.png" />
 
-  <!-- Google Search Console verification: replace YOUR_TOKEN -->
-  <meta name="google-site-verification" content="YOUR_TOKEN" />
-
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,7 +38,7 @@
     "operatingSystem": "Android, Web",
     "description": "DropShare is a lightweight chat-based file and text sharing tool that supports browser access, HTTP, WebDAV, FTP, and SFTP.",
     "url": "https://eagle518-hub.github.io/",
-    "softwareHelp": "https://eagle518-hub.github.io/",
+    "softwareHelp": "https://eagle518-hub.github.io/web-access.html",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -84,6 +78,7 @@
     }
 
     a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
     img { max-width: 100%; display: block; }
     .container { width: min(var(--max-width), calc(100% - 32px)); margin: 0 auto; }
 
@@ -201,6 +196,7 @@
       font-weight: 700;
       transition: 0.2s ease;
       border: 1px solid transparent;
+      cursor: pointer;
     }
 
     .btn-primary {
@@ -357,6 +353,35 @@
       margin-bottom: 18px;
     }
 
+    .screenshots-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .screenshots-rail-wrap {
+      position: relative;
+    }
+
     .screenshots-rail {
       display: grid;
       grid-auto-flow: column;
@@ -365,6 +390,8 @@
       overflow-x: auto;
       padding-bottom: 10px;
       scroll-snap-type: x proximity;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.18) transparent;
     }
 
     .screenshots-rail::-webkit-scrollbar {
@@ -386,6 +413,17 @@
       box-shadow: var(--shadow);
     }
 
+    .shot-button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      width: 100%;
+      padding: 0;
+      cursor: pointer;
+      text-align: left;
+      color: inherit;
+    }
+
     .shot-card img {
       width: 100%;
       aspect-ratio: 1080 / 2280;
@@ -393,6 +431,8 @@
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(7, 10, 24, 0.82);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease;
     }
 
     .shot-card span {
@@ -400,6 +440,11 @@
       padding: 12px 8px 4px;
       font-size: 14px;
       color: var(--muted);
+    }
+
+    .shot-button:hover img,
+    .shot-button:focus-visible img {
+      transform: scale(1.03);
     }
 
     .section-title {
@@ -514,6 +559,104 @@
     .faq summary { cursor: pointer; font-weight: 700; }
     .faq p { color: var(--muted); margin: 12px 0 0; }
 
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 6, 16, 0.86);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 120;
+    }
+
+    .lightbox.is-open { display: flex; }
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-out;
+    }
+
+    .lightbox-dialog {
+      position: relative;
+      width: min(1100px, 100%);
+      max-height: 100%;
+      display: grid;
+      gap: 14px;
+      z-index: 1;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lightbox-meta {
+      color: var(--muted);
+    }
+
+    .lightbox-meta strong {
+      display: block;
+      color: var(--text);
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      cursor: pointer;
+    }
+
+    .lightbox-stage-wrap {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .lightbox-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      max-height: 78vh;
+      padding: 14px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .lightbox-stage img {
+      width: auto;
+      max-width: 100%;
+      max-height: 74vh;
+      border-radius: 24px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+    }
+
+    .lightbox-nav {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      cursor: pointer;
+    }
+
     footer {
       padding: 28px 0 56px;
       color: var(--muted);
@@ -541,6 +684,14 @@
 
       .nav-links {
         width: 100%;
+      }
+
+      .lightbox-stage-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .lightbox-nav {
+        display: none;
       }
     }
 
@@ -602,7 +753,7 @@
         <a href="#protocols">Protocols</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#faq">FAQ</a>
-        <a href="#download">Download</a>
+        <a href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">Download</a>
       </nav>
     </div>
   </header>
@@ -618,7 +769,7 @@
           </p>
           <div class="cta-row">
             <a class="btn btn-primary" id="download" href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
-            <a class="btn btn-secondary" href="#features">Explore Features</a>
+            <a class="btn btn-secondary" href="/web-access.html">Access via Browser</a>
           </div>
           <div class="hero-points">
             <span>No login required in many local sharing scenarios</span>
@@ -675,40 +826,62 @@
                 <h2 class="section-title">App screenshots</h2>
                 <p class="section-sub">Core screens from the Android app, covering chat-based sharing, content management, and connection workflows.</p>
               </div>
+              <div class="screenshots-actions" aria-label="Screenshot controls">
+                <button class="icon-btn" type="button" data-carousel-prev aria-label="Previous screenshots">←</button>
+                <button class="icon-btn" type="button" data-carousel-next aria-label="Next screenshots">→</button>
+              </div>
             </div>
-            <div class="screenshots-rail" aria-label="DropShare app screenshots">
-              <figure class="shot-card">
-                <img src="images/Screen1.png" alt="DropShare app screenshot 1" loading="lazy" />
-                <span>Start sharing in one tap</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/Screen2.png" alt="DropShare app screenshot 2" loading="lazy" />
-                <span>Connect with QR access</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/Screen3.png" alt="DropShare app screenshot 3" loading="lazy" />
-                <span>Tools and protocol setup</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/Screen4.png" alt="DropShare app screenshot 4" loading="lazy" />
-                <span>Enable WebDAV, FTP, SFTP</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/Screen5.png" alt="DropShare app screenshot 5" loading="lazy" />
-                <span>Chat with files and text</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/screen6.png" alt="DropShare app screenshot 6" loading="lazy" />
-                <span>Send from any browser</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/screen7.png" alt="DropShare app screenshot 7" loading="lazy" />
-                <span>Preview shared media instantly</span>
-              </figure>
-              <figure class="shot-card">
-                <img src="images/screen8.png" alt="DropShare app screenshot 8" loading="lazy" />
-                <span>Browse shared folders</span>
-              </figure>
+            <div class="screenshots-rail-wrap">
+              <div class="screenshots-rail" aria-label="DropShare app screenshots" data-carousel>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Start sharing in one tap" data-shot-desc="A clean mobile entry point for beginning a DropShare session." data-shot-src="images/Screen1.png">
+                    <img src="images/Screen1.png" alt="DropShare app screenshot 1" loading="lazy" />
+                    <span>Start sharing in one tap</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Connect with QR access" data-shot-desc="Help nearby devices join faster with a lightweight connection flow." data-shot-src="images/Screen2.png">
+                    <img src="images/Screen2.png" alt="DropShare app screenshot 2" loading="lazy" />
+                    <span>Connect with QR access</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Tools and protocol setup" data-shot-desc="Configure practical sharing tools without leaving the app." data-shot-src="images/Screen3.png">
+                    <img src="images/Screen3.png" alt="DropShare app screenshot 3" loading="lazy" />
+                    <span>Tools and protocol setup</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Enable WebDAV, FTP, SFTP" data-shot-desc="Switch to the transfer method that matches your workflow." data-shot-src="images/Screen4.png">
+                    <img src="images/Screen4.png" alt="DropShare app screenshot 4" loading="lazy" />
+                    <span>Enable WebDAV, FTP, SFTP</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Chat with files and text" data-shot-desc="Share messages and files together in one conversation-style UI." data-shot-src="images/Screen5.png">
+                    <img src="images/Screen5.png" alt="DropShare app screenshot 5" loading="lazy" />
+                    <span>Chat with files and text</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Send from any browser" data-shot-desc="Let receivers open shared content with minimal friction." data-shot-src="images/Screen6.png">
+                    <img src="images/Screen6.png" alt="DropShare app screenshot 6" loading="lazy" />
+                    <span>Send from any browser</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Preview shared media instantly" data-shot-desc="Visual content is easy to browse and open across devices." data-shot-src="images/Screen7.png">
+                    <img src="images/Screen7.png" alt="DropShare app screenshot 7" loading="lazy" />
+                    <span>Preview shared media instantly</span>
+                  </button>
+                </figure>
+                <figure class="shot-card">
+                  <button class="shot-button" type="button" data-shot-title="Browse shared folders" data-shot-desc="Navigate content in a familiar file-oriented experience." data-shot-src="images/Screen8.png">
+                    <img src="images/Screen8.png" alt="DropShare app screenshot 8" loading="lazy" />
+                    <span>Browse shared folders</span>
+                  </button>
+                </figure>
+              </div>
             </div>
           </div>
         </div>
@@ -869,5 +1042,138 @@
       </div>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-backdrop" type="button" data-lightbox-close aria-label="Close preview"></button>
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+      <div class="lightbox-top">
+        <div class="lightbox-meta">
+          <strong id="lightboxTitle">Screenshot</strong>
+          <span id="lightboxDesc">Preview</span>
+        </div>
+        <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close preview">✕</button>
+      </div>
+      <div class="lightbox-stage-wrap">
+        <button class="lightbox-nav" type="button" id="lightboxPrev" aria-label="Previous screenshot">←</button>
+        <div class="lightbox-stage">
+          <img id="lightboxImage" src="" alt="Expanded screenshot preview" />
+        </div>
+        <button class="lightbox-nav" type="button" id="lightboxNext" aria-label="Next screenshot">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const rail = document.querySelector('[data-carousel]');
+      const prevBtn = document.querySelector('[data-carousel-prev]');
+      const nextBtn = document.querySelector('[data-carousel-next]');
+      const shotButtons = Array.from(document.querySelectorAll('.shot-button'));
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxDesc = document.getElementById('lightboxDesc');
+      const lightboxPrev = document.getElementById('lightboxPrev');
+      const lightboxNext = document.getElementById('lightboxNext');
+      const closeButtons = document.querySelectorAll('[data-lightbox-close]');
+      let autoTimer = null;
+      let currentIndex = 0;
+
+      function getScrollAmount() {
+        if (!rail) return 320;
+        const firstCard = rail.querySelector('.shot-card');
+        return firstCard ? firstCard.getBoundingClientRect().width + 16 : 320;
+      }
+
+      function scrollRail(direction) {
+        if (!rail) return;
+        rail.scrollBy({ left: getScrollAmount() * direction, behavior: 'smooth' });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { scrollRail(-1); restartAuto(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { scrollRail(1); restartAuto(); });
+
+      function startAuto() {
+        if (!rail || shotButtons.length < 2) return;
+        stopAuto();
+        autoTimer = window.setInterval(function () {
+          const nearEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 8;
+          if (nearEnd) {
+            rail.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            scrollRail(1);
+          }
+        }, 3200);
+      }
+
+      function stopAuto() {
+        if (autoTimer) {
+          window.clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function restartAuto() {
+        stopAuto();
+        startAuto();
+      }
+
+      function openLightbox(index) {
+        currentIndex = index;
+        const trigger = shotButtons[currentIndex];
+        if (!trigger) return;
+        lightboxImage.src = trigger.dataset.shotSrc;
+        lightboxTitle.textContent = trigger.dataset.shotTitle || 'Screenshot';
+        lightboxDesc.textContent = trigger.dataset.shotDesc || '';
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function stepLightbox(direction) {
+        currentIndex = (currentIndex + direction + shotButtons.length) % shotButtons.length;
+        openLightbox(currentIndex);
+      }
+
+      shotButtons.forEach(function (button, index) {
+        button.addEventListener('click', function () {
+          openLightbox(index);
+          stopAuto();
+        });
+      });
+
+      closeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          closeLightbox();
+          startAuto();
+        });
+      });
+
+      lightboxPrev.addEventListener('click', function () { stepLightbox(-1); });
+      lightboxNext.addEventListener('click', function () { stepLightbox(1); });
+
+      document.addEventListener('keydown', function (event) {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') stepLightbox(-1);
+        if (event.key === 'ArrowRight') stepLightbox(1);
+      });
+
+      if (rail) {
+        rail.addEventListener('mouseenter', stopAuto);
+        rail.addEventListener('mouseleave', startAuto);
+        rail.addEventListener('touchstart', stopAuto, { passive: true });
+        rail.addEventListener('touchend', startAuto, { passive: true });
+      }
+
+      startAuto();
+    })();
+  </script>
 </body>
 </html>
