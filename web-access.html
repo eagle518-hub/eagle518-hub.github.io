@@ -3,22 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Use DropShare in Your Browser</title>
-  <meta name="description" content="Learn how to access DropShare shared files, messages, and links from your browser. No complex setup for the receiving side in many local sharing scenarios." />
-  <meta name="keywords" content="DropShare browser access, open in browser, local file sharing, browser file transfer, chat-based sharing, receive files in browser" />
+  <title>How to Access DropShare in Browser</title>
+  <meta name="description" content="Learn how to open DropShare shared files, text, and chat content in a browser. Understand sender and receiver roles, local link access, and practical browser-based file sharing steps." />
+  <meta name="keywords" content="DropShare browser access, browser file transfer, local file sharing, open shared files in browser, chat-based sharing, phone to PC transfer, no install file sharing" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://eagle518-hub.github.io/web-access.html" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Use DropShare in Your Browser" />
-  <meta property="og:description" content="Open DropShare shared files, text, and links in your browser with a simple local access flow." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Access DropShare in Browser" />
+  <meta property="og:description" content="A practical guide to opening DropShare shared content in a browser on another device." />
   <meta property="og:url" content="https://eagle518-hub.github.io/web-access.html" />
   <meta property="og:site_name" content="DropShare" />
+  <meta property="og:image" content="https://eagle518-hub.github.io/images/img_dropshare.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Access DropShare in Browser" />
+  <meta name="twitter:description" content="A practical guide to opening DropShare shared content in a browser on another device." />
+  <meta name="twitter:image" content="https://eagle518-hub.github.io/images/img_dropshare.png" />
 
   <style>
     :root {
       --bg: #0b1020;
-      --bg-soft: #121933;
       --card: rgba(255,255,255,0.08);
       --card-border: rgba(255,255,255,0.14);
       --text: #eef2ff;
@@ -28,15 +33,17 @@
       --accent: #7ef0c3;
       --shadow: 0 20px 60px rgba(0,0,0,0.35);
       --radius: 22px;
-      --max-width: 1100px;
+      --max-width: 1120px;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.7;
+      overflow-x: hidden;
       background:
         radial-gradient(circle at top left, rgba(87,208,255,0.16), transparent 26%),
         radial-gradient(circle at top right, rgba(124,156,255,0.18), transparent 22%),
@@ -44,12 +51,14 @@
     }
 
     a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; }
     .container { width: min(var(--max-width), calc(100% - 32px)); margin: 0 auto; }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
       backdrop-filter: blur(14px);
       background: rgba(8, 13, 28, 0.66);
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -67,13 +76,13 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
     }
 
     .brand-badge {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 14px;
       overflow: hidden;
       box-shadow: var(--shadow);
@@ -94,17 +103,17 @@
       font-size: 14px;
     }
 
-    .nav-links a:hover { color: white; }
+    .nav-links a:hover { color: #fff; }
 
     .hero {
-      padding: 64px 0 24px;
+      padding: 58px 0 26px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: 24px;
-      align-items: center;
+      align-items: start;
     }
 
     .eyebrow {
@@ -117,28 +126,28 @@
       color: #d9fff0;
       border-radius: 999px;
       font-size: 13px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     h1 {
       font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.06;
+      line-height: 1.08;
       letter-spacing: -1.2px;
-      margin: 0 0 16px;
+      margin: 0 0 14px;
     }
 
     .hero p {
       color: var(--muted);
       font-size: 18px;
-      margin: 0 0 24px;
-      max-width: 700px;
+      margin: 0 0 22px;
+      max-width: 740px;
     }
 
     .cta-row {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .btn {
@@ -151,6 +160,7 @@
       font-weight: 700;
       transition: 0.2s ease;
       border: 1px solid transparent;
+      cursor: pointer;
     }
 
     .btn:hover { transform: translateY(-1px); }
@@ -182,11 +192,11 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .card {
+    .card, .panel {
       background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
       border: 1px solid var(--card-border);
-      border-radius: 26px;
-      padding: 20px;
+      border-radius: 24px;
+      padding: 22px;
       box-shadow: var(--shadow);
     }
 
@@ -228,7 +238,7 @@
     .mini-chat {
       display: grid;
       gap: 12px;
-      min-height: 260px;
+      min-height: 250px;
       padding: 12px;
       border-radius: 20px;
       background: rgba(255,255,255,0.04);
@@ -255,9 +265,7 @@
       color: #eafff7;
     }
 
-    .section {
-      padding: 34px 0;
-    }
+    .section { padding: 34px 0; }
 
     .section-title {
       font-size: clamp(28px, 3vw, 42px);
@@ -268,13 +276,7 @@
     .section-sub {
       margin: 0 0 22px;
       color: var(--muted);
-      max-width: 820px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      max-width: 860px;
     }
 
     .grid-2 {
@@ -283,97 +285,24 @@
       gap: 18px;
     }
 
-    .screenshots-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: end;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    .screenshots-rail-wrap {
-      position: relative;
-    }
-
-    .screenshots-rail {
+    .grid-3 {
       display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(230px, 290px);
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-snap-type: x proximity;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.18) transparent;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
-    .screenshots-rail::-webkit-scrollbar {
-      height: 10px;
-    }
-
-    .screenshots-rail::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.18);
-      border-radius: 999px;
-    }
-
-    .shot-card {
-      scroll-snap-align: start;
-      margin: 0;
-      padding: 10px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: var(--shadow);
-    }
-
-    .shot-button {
-      appearance: none;
-      border: 0;
-      background: transparent;
-      width: 100%;
-      padding: 0;
-      cursor: default;
-      text-align: left;
-      color: inherit;
-    }
-
-    .shot-card img {
-      width: 100%;
-      aspect-ratio: 1080 / 2280;
-      object-fit: cover;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(7, 10, 24, 0.82);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease;
-    }
-
-    .shot-card span {
-      display: block;
-      padding: 12px 8px 4px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .shot-card img:hover {
-      transform: scale(1.03);
-    }
-
-    .panel {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel h3 {
+    .role-card h3, .panel h3 {
       margin: 0 0 10px;
       font-size: 20px;
     }
 
-    .panel p, .panel li { color: var(--muted); }
+    .role-list, .panel ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .role-list li, .panel li { margin-bottom: 8px; }
 
     .icon {
       width: 44px;
@@ -385,6 +314,32 @@
       border: 1px solid rgba(124,156,255,0.24);
       margin-bottom: 14px;
       font-size: 20px;
+    }
+
+    .screenshot-callout {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .image-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: auto;
+    }
+
+    .image-note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 10px;
     }
 
     .steps {
@@ -466,9 +421,10 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid, .grid-3, .grid-2 {
+      .hero-grid, .grid-2, .grid-3, .screenshot-callout {
         grid-template-columns: 1fr;
       }
+
       .nav {
         align-items: flex-start;
         padding: 12px 0;
@@ -477,18 +433,20 @@
     }
 
     @media (max-width: 640px) {
-      .screenshots-rail {
-        grid-auto-columns: minmax(180px, 72vw);
-        gap: 12px;
+      .container {
+        width: min(var(--max-width), calc(100% - 24px));
       }
 
-      .shot-card {
-        border-radius: 22px;
-        padding: 8px;
+      .hero {
+        padding: 48px 0 22px;
       }
 
-      .shot-card img {
-        border-radius: 18px;
+      .section {
+        padding: 26px 0;
+      }
+
+      .card, .panel {
+        padding: 18px;
       }
     }
   </style>
@@ -497,15 +455,14 @@
   <header class="topbar">
     <div class="container nav">
       <a class="brand" href="/" aria-label="DropShare home">
-        <span class="brand-badge">
-          <img src="images/web_hi_res_512.png" alt="DropShare icon" />
-        </span>
+        <span class="brand-badge"><img src="images/web_hi_res_512.png" alt="DropShare icon" /></span>
         <span>DropShare</span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#how">How It Works</a>
-        <a href="#browser-steps">Steps</a>
-        <a href="#tips">Tips</a>
+        <a href="#overview">Overview</a>
+        <a href="#roles">Roles</a>
+        <a href="#example">Example</a>
+        <a href="#steps">Steps</a>
         <a href="#faq">FAQ</a>
         <a href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">Google Play</a>
       </nav>
@@ -513,22 +470,22 @@
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="overview">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Browser-friendly receiving experience</div>
-          <h1>Open shared content from DropShare in your browser.</h1>
+          <div class="eyebrow">Browser access guide</div>
+          <h1>How to access DropShare shared content in a browser</h1>
           <p>
-            DropShare lets the receiving side access shared files, text, and links through a browser in many local sharing scenarios. Start a sharing session in the app, open the generated link, and access content from another device with minimal friction.
+            This page explains the browser side of DropShare. The app runs on the sender device, creates a reachable sharing session, and gives the receiver a local link that can be opened on another device such as a phone, tablet, or computer.
           </p>
           <div class="cta-row">
             <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">Get DropShare on Google Play</a>
             <a class="btn btn-secondary" href="/">Back to Home</a>
           </div>
           <div class="hero-notes">
-            <span>No complex receiving setup</span>
-            <span>Good for local network access</span>
-            <span>Useful for files, text, and links</span>
+            <span>Sender uses the app</span>
+            <span>Receiver can use a browser</span>
+            <span>Useful on local network or hotspot</span>
           </div>
         </div>
 
@@ -540,12 +497,12 @@
               <span class="dot"></span>
             </div>
             <div class="browser-preview">
-              <div class="bar">https://your-local-link.example</div>
+              <div class="bar">http://192.168.1.100:8080</div>
               <div class="mini-chat">
-                <div class="bubble left">Share started on your phone.</div>
-                <div class="bubble-file">📄 Project_Proposal.pdf · Ready to open</div>
-                <div class="bubble right">Opened in browser on another device.</div>
-                <div class="bubble left">You can also receive text, links, and other shared content.</div>
+                <div class="bubble left">DropShare sharing started on phone.</div>
+                <div class="bubble-file">📄 Shared file is ready to open</div>
+                <div class="bubble right">Opened from browser on another device</div>
+                <div class="bubble left">This flow is ideal for low-friction receiving.</div>
               </div>
             </div>
           </div>
@@ -553,135 +510,110 @@
       </div>
     </section>
 
-    <section class="section" id="how">
+    <section class="section" id="roles">
       <div class="container">
-        <h2 class="section-title">What “Open in Browser” means</h2>
+        <h2 class="section-title">Understand the two roles first</h2>
         <p class="section-sub">
-          The browser access option does not replace the app itself. Instead, it lets another device open content that DropShare is sharing. In many cases, the sender uses the DropShare app, while the receiver simply opens a generated local link in a browser.
+          The biggest confusion usually comes from thinking the browser replaces the app. It does not. DropShare browser access is a sender-and-receiver workflow with two different roles.
         </p>
-        <div class="grid-3">
-          <article class="panel">
+        <div class="grid-2">
+          <article class="panel role-card">
             <div class="icon">📱</div>
-            <h3>Sender starts sharing</h3>
-            <p>The device running DropShare starts a sharing session and makes content available.</p>
+            <h3>Sender side</h3>
+            <ul class="role-list">
+              <li>Installs and opens DropShare</li>
+              <li>Starts chat or sharing mode</li>
+              <li>Creates the reachable local link</li>
+              <li>Keeps the sharing session available</li>
+            </ul>
           </article>
-          <article class="panel">
-            <div class="icon">🔗</div>
-            <h3>Receiver opens the link</h3>
-            <p>The receiving side opens the generated access link from a browser on a phone, tablet, or computer.</p>
-          </article>
-          <article class="panel">
+          <article class="panel role-card">
             <div class="icon">🌐</div>
-            <h3>Content becomes accessible</h3>
-            <p>Files, messages, or shared resources can then be viewed or downloaded through the browser flow.</p>
+            <h3>Receiver side</h3>
+            <ul class="role-list">
+              <li>Usually does not need to install the app</li>
+              <li>Opens the provided link in a browser</li>
+              <li>Views files, chat content, or shared resources</li>
+              <li>Downloads or reads content from the shared page</li>
+            </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="browser-steps">
+    <section class="section" id="example">
+      <div class="container screenshot-callout">
+        <div>
+          <h2 class="section-title">Real usage example</h2>
+          <p class="section-sub">
+            A practical example is phone-to-PC sharing. The phone runs DropShare and the PC opens the shared address in a browser. This is one of the clearest ways to understand the product flow.
+          </p>
+          <div class="panel">
+            <h3>What this example shows</h3>
+            <ul>
+              <li>The mobile app is the sending side</li>
+              <li>The browser is the receiving side</li>
+              <li>Shared text and files can appear in one flow</li>
+              <li>The receiver gets access through a simple local address</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="image-frame">
+            <img src="images/img_dropshare.png" alt="DropShare browser access example" />
+          </div>
+          <p class="image-note">You can replace this image with your real combined phone + web screenshot for stronger credibility.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="steps">
       <div class="container grid-2">
         <div>
-          <h2 class="section-title">How to use browser access</h2>
-          <p class="section-sub">A simple usage flow for local sharing and browser-based receiving.</p>
+          <h2 class="section-title">Step-by-step browser access flow</h2>
+          <p class="section-sub">This version is intentionally practical and closer to how users actually complete the task.</p>
           <div class="steps">
             <div class="step">
               <div>
-                <h3>Install and open DropShare</h3>
-                <p>Install the app on the device that will share files, text, or links.</p>
+                <h3>Open DropShare on the sender device</h3>
+                <p>Use the phone or device that will provide the file, text, or chat content.</p>
               </div>
             </div>
             <div class="step">
               <div>
-                <h3>Start a sharing session</h3>
-                <p>Create a chat or enable a transfer mode so the app can provide an access link.</p>
+                <h3>Start a chat or transfer session</h3>
+                <p>Prepare the content you want to expose, then let the app generate the reachable sharing endpoint.</p>
               </div>
             </div>
             <div class="step">
               <div>
-                <h3>Use the generated local link</h3>
-                <p>Open the link from another device in the same reachable network environment, such as a local network or hotspot.</p>
+                <h3>Get the local access address</h3>
+                <p>DropShare may provide an address such as <code>http://192.168.1.100:8080</code> depending on the current network and transfer mode.</p>
               </div>
             </div>
             <div class="step">
               <div>
-                <h3>View or receive shared content</h3>
-                <p>The browser can then access the shared page, chat view, file listing, or other available content.</p>
+                <h3>Open that address on another device</h3>
+                <p>Use a browser on a PC, tablet, or another phone to access the shared content.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>View, read, or download</h3>
+                <p>The receiver can then interact with the shared files, text, or other available content through the browser page.</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>Example access link</h3>
-          <p>You may see a local address similar to:</p>
-          <p><code>http://192.168.1.100:8080</code></p>
-          <p>
-            The exact address depends on the device, network, and current sharing mode. The main idea is simple: the app provides the sharing endpoint, and the browser opens it.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="screenshots">
-      <div class="container">
-        <div class="screenshots-head">
-          <div>
-            <h2 class="section-title">App screenshots</h2>
-            <p class="section-sub">Key screens from DropShare, covering server setup, browser access, chat transfer, and shared file browsing.</p>
-          </div>
-        </div>
-        <div class="screenshots-rail-wrap">
-          <div class="screenshots-rail" aria-label="DropShare app screenshots">
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/Screen1.png" alt="DropShare app screenshot 1" loading="lazy" />
-                <span>Start sharing in one tap</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/Screen2.png" alt="DropShare app screenshot 2" loading="lazy" />
-                <span>Connect with QR access</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/Screen3.png" alt="DropShare app screenshot 3" loading="lazy" />
-                <span>Tools and protocol setup</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/Screen4.png" alt="DropShare app screenshot 4" loading="lazy" />
-                <span>Enable WebDAV, FTP, SFTP</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/Screen5.png" alt="DropShare app screenshot 5" loading="lazy" />
-                <span>Chat with files and text</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/screen6.png" alt="DropShare app screenshot 6" loading="lazy" />
-                <span>Send from any browser</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/screen7.png" alt="DropShare app screenshot 7" loading="lazy" />
-                <span>Preview shared media instantly</span>
-              </div>
-            </figure>
-            <figure class="shot-card">
-              <div class="shot-button">
-                <img src="images/screen8.png" alt="DropShare app screenshot 8" loading="lazy" />
-                <span>Browse shared folders</span>
-              </div>
-            </figure>
-          </div>
+          <h3>Typical browser-access use cases</h3>
+          <ul>
+            <li>Phone to PC file pickup</li>
+            <li>Quick transfer without installing the app on the receiving side</li>
+            <li>Temporary content access on the same Wi-Fi network</li>
+            <li>Hotspot-based sharing in offline or semi-offline situations</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -689,22 +621,21 @@
     <section class="section" id="tips">
       <div class="container grid-2">
         <div>
-          <h2 class="section-title">Helpful usage notes</h2>
-          <p class="section-sub">A few points make the browser flow easier to understand and use.</p>
+          <h2 class="section-title">Helpful notes before users try it</h2>
+          <p class="section-sub">These points reduce confusion and help the page answer search intent better.</p>
           <div class="tips">
-            <div class="tip">The receiving side often does not need to install the app when browser access is enough.</div>
-            <div class="tip">Browser access is especially useful for quick temporary sharing and cross-device receiving.</div>
-            <div class="tip">The sender device usually needs to keep the sharing session available while the receiver is accessing content.</div>
+            <div class="tip">The receiver often only needs the shared link and a browser.</div>
+            <div class="tip">The sender device must keep the sharing session available during access.</div>
+            <div class="tip">Local network reachability matters. Devices usually need to be on the same reachable network path.</div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>When browser access is a great fit</h3>
+          <h3>What browser access does not mean</h3>
           <ul>
-            <li>Phone to PC file pickup</li>
-            <li>Temporary download link on a local network</li>
-            <li>Quick text or link transfer between devices</li>
-            <li>Low-friction receiving without extra installation on the other side</li>
+            <li>It does not mean the full app is replaced by a browser app</li>
+            <li>It does not remove the need for the sender device to run DropShare</li>
+            <li>It is not the same as a permanent cloud-hosted public file page</li>
           </ul>
         </div>
       </div>
@@ -713,26 +644,26 @@
     <section class="section faq" id="faq">
       <div class="container">
         <h2 class="section-title">Frequently asked questions</h2>
-        <p class="section-sub">These answers help clarify the browser entry point and also strengthen SEO for browser-related DropShare searches.</p>
+        <p class="section-sub">These answers are written to serve both users and search engines looking for browser-based local file sharing guidance.</p>
 
         <details>
           <summary>Do I need to install DropShare on both devices?</summary>
-          <p>Not always. In many browser-based receiving scenarios, the sender uses the DropShare app and the receiver simply opens the provided link in a browser.</p>
+          <p>Not always. In many local browser-access scenarios, only the sender device needs the app. The receiving device can open the generated link in a browser.</p>
         </details>
 
         <details>
-          <summary>Does “Open in Browser” mean the whole app runs in the browser?</summary>
-          <p>No. It means the browser can access content made available by DropShare. The app still provides the sharing session on the sender side.</p>
+          <summary>Does browser access work well for phone to PC transfer?</summary>
+          <p>Yes. This is one of the most natural use cases because a phone can run the sharing session and a PC can open the provided address for easy receiving.</p>
         </details>
 
         <details>
-          <summary>Can I use browser access for local network sharing?</summary>
-          <p>Yes. This is one of the most natural use cases. A local network or hotspot environment can make quick browser access very convenient.</p>
+          <summary>What kind of content can be opened in the browser?</summary>
+          <p>Depending on the sharing mode, users may open files, text, chat content, and other lightweight shared resources provided by DropShare.</p>
         </details>
 
         <details>
-          <summary>What kind of content can be opened from the browser?</summary>
-          <p>Depending on the sharing mode, browser access can be used for files, shared text, links, and other lightweight content views provided by DropShare.</p>
+          <summary>Why can the browser page fail to open?</summary>
+          <p>Usually this is related to network reachability, local IP changes, hotspot or Wi-Fi environment changes, or the sender device no longer keeping the session active.</p>
         </details>
       </div>
     </section>
