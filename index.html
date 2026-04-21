@@ -1,140 +1,873 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <meta name="google-site-verification" content="lI_KE_JlGJR5vU23GsLxjj0CBT-u3WBRt60SwepPNtk" />
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DropShare</title>
-    <meta name="description" content="DropShare is a fast and easy file sharing app for Android. Transfer files on your local network, access your device from a web browser, and manage sharing with simple controls.">
-    <style>
-        :root {
-            --bg: #f4f7fb;
-            --card: #ffffff;
-            --text: #172033;
-            --muted: #5e6b85;
-            --accent: #1769ff;
-            --accent-hover: #0f53cd;
-            --border: #dce4f2;
-        }
+  <meta name="google-site-verification" content="lI_KE_JlGJR5vU23GsLxjj0CBT-u3WBRt60SwepPNtk" />
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropShare - Chat-Based File & Text Sharing Tool</title>
+  <meta name="description" content="DropShare is a lightweight chat-based file and text sharing tool. Share files, messages, and links across devices with browser support, HTTP, WebDAV, FTP, and SFTP access." />
+  <meta name="keywords" content="DropShare, file transfer, file sharing, chat-based sharing, text sharing, browser file transfer, HTTP file server, WebDAV, FTP, SFTP, local file sharing, cross-device sharing" />
+  <meta name="author" content="DropShare" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://eagle518-hub.github.io/" />
+  <link rel="icon" type="image/png" href="images/web_hi_res_512.png" />
+  <link rel="apple-touch-icon" href="images/web_hi_res_512.png" />
 
-        * {
-            box-sizing: border-box;
-        }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DropShare - Chat-Based File & Text Sharing Tool" />
+  <meta property="og:description" content="Transfer files, text, and links instantly across devices with a simple chat-style experience and support for HTTP, WebDAV, FTP, and SFTP." />
+  <meta property="og:url" content="https://eagle518-hub.github.io/" />
+  <meta property="og:site_name" content="DropShare" />
+  <meta property="og:image" content="https://eagle518-hub.github.io/images/img_dropshare.png" />
+  <meta property="og:image:width" content="1536" />
+  <meta property="og:image:height" content="1024" />
 
-        body {
-            margin: 0;
-            font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            color: var(--text);
-            background:
-                radial-gradient(circle at top right, #dbe8ff 0, transparent 28%),
-                linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
-        }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DropShare - Chat-Based File & Text Sharing Tool" />
+  <meta name="twitter:description" content="Chat-based file and text sharing across devices with browser access and multiple transfer protocols." />
+  <meta name="twitter:image" content="https://eagle518-hub.github.io/images/img_dropshare.png" />
 
-        .wrap {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 32px 20px;
-        }
+  <!-- Google Search Console verification: replace YOUR_TOKEN -->
+  <meta name="google-site-verification" content="YOUR_TOKEN" />
 
-        .card {
-            width: 100%;
-            max-width: 760px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px 32px;
-            box-shadow: 0 24px 60px rgba(23, 32, 51, 0.08);
-        }
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DropShare",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Android, Web",
+    "description": "DropShare is a lightweight chat-based file and text sharing tool that supports browser access, HTTP, WebDAV, FTP, and SFTP.",
+    "url": "https://eagle518-hub.github.io/",
+    "softwareHelp": "https://eagle518-hub.github.io/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
 
-        h1 {
-            margin: 0 0 16px;
-            font-size: 2.4rem;
-            line-height: 1.1;
-        }
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.14);
+      --text: #eef2ff;
+      --muted: #b5c0e0;
+      --primary: #7c9cff;
+      --primary-2: #57d0ff;
+      --accent: #7ef0c3;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max-width: 1180px;
+    }
 
-        p {
-            margin: 0 0 16px;
-            font-size: 1.05rem;
-            line-height: 1.75;
-            color: var(--muted);
-        }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(87,208,255,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(124,156,255,0.20), transparent 24%),
+        linear-gradient(180deg, #0a1022 0%, #0d1429 48%, #0b1020 100%);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-        .features {
-            margin: 24px 0 32px;
-            padding-left: 20px;
-            color: var(--text);
-        }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--max-width), calc(100% - 32px)); margin: 0 auto; }
 
-        .features li {
-            margin: 10px 0;
-            line-height: 1.6;
-        }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 13, 28, 0.66);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-        .cta {
-            display: inline-block;
-            padding: 14px 22px;
-            border-radius: 12px;
-            background: var(--accent);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 16px;
+    }
 
-        .cta:hover {
-            background: var(--accent-hover);
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
 
-        .note {
-            margin-top: 18px;
-            font-size: 0.95rem;
-            color: var(--muted);
-        }
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+    }
 
-        @media (max-width: 640px) {
-            .card {
-                padding: 28px 22px;
-                border-radius: 18px;
-            }
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-grid > *,
+    .grid-2 > *,
+    .grid-3 > *,
+    .showcase-grid > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 8px 14px;
+      border: 1px solid rgba(126,240,195,0.25);
+      background: rgba(126,240,195,0.08);
+      color: #d9fff0;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1.05;
+      letter-spacing: -1.3px;
+      margin: 0 0 18px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 28px;
+      max-width: 700px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-points {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-points span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mock-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(124,156,255,0.18), transparent 28%);
+      pointer-events: none;
+    }
+
+    .window {
+      background: rgba(7, 10, 24, 0.82);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .window-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+    }
+
+    .chat-ui {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .bubble, .file-bubble {
+      max-width: 86%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      font-size: 14px;
+    }
+
+    .bubble.left {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .bubble.right {
+      background: linear-gradient(135deg, rgba(124,156,255,0.95), rgba(87,208,255,0.95));
+      color: white;
+      margin-left: auto;
+    }
+
+    .file-bubble {
+      background: rgba(126,240,195,0.14);
+      border: 1px solid rgba(126,240,195,0.24);
+      color: #eafff7;
+    }
+
+    .sections { padding: 18px 0 72px; }
+    .section { padding: 38px 0; }
+
+    .showcase-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .promo-card {
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .promo-frame {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7, 10, 24, 0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .promo-frame img {
+      width: 100%;
+      height: auto;
+    }
+
+    .promo-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 4px 0;
+      flex-wrap: wrap;
+    }
+
+    .promo-caption p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .promo-caption strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    .screenshots-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .screenshots-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(230px, 290px);
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-snap-type: x proximity;
+    }
+
+    .screenshots-rail::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .screenshots-rail::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
+    }
+
+    .shot-card {
+      scroll-snap-align: start;
+      margin: 0;
+      padding: 10px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .shot-card img {
+      width: 100%;
+      aspect-ratio: 1080 / 2280;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7, 10, 24, 0.82);
+    }
+
+    .shot-card span {
+      display: block;
+      padding: 12px 8px 4px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3.2vw, 42px);
+      margin: 0 0 12px;
+      letter-spacing: -0.8px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 820px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(124,156,255,0.14);
+      border: 1px solid rgba(124,156,255,0.22);
+      margin-bottom: 14px;
+      font-size: 20px;
+    }
+
+    .protocols {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      font-weight: 800;
+    }
+
+    .faq details {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .faq details + details { margin-top: 12px; }
+    .faq summary { cursor: pointer; font-weight: 700; }
+    .faq p { color: var(--muted); margin: 12px 0 0; }
+
+    footer {
+      padding: 28px 0 56px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 24px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        padding: 12px 0;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max-width), calc(100% - 24px));
+      }
+
+      .hero {
+        padding: 52px 0 32px;
+      }
+
+      .section {
+        padding: 28px 0;
+      }
+
+      .card,
+      .promo-card,
+      .mock-card {
+        padding: 16px;
+      }
+
+      .promo-frame {
+        border-radius: 18px;
+      }
+
+      .screenshots-rail {
+        grid-auto-columns: minmax(180px, 72vw);
+        gap: 12px;
+      }
+
+      .shot-card {
+        border-radius: 22px;
+        padding: 8px;
+      }
+
+      .shot-card img {
+        border-radius: 18px;
+      }
+
+      .tag {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <main class="wrap">
-        <section class="card">
-            <h1>DropShare</h1>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="DropShare home">
+        <span class="brand-badge">
+          <img src="images/web_hi_res_512.png" alt="DropShare icon" />
+        </span>
+        <span>DropShare</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#showcase">Screenshots</a>
+        <a href="#features">Features</a>
+        <a href="#protocols">Protocols</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Chat-based file and text sharing across devices</div>
+          <h1>DropShare makes file transfer feel as easy as chatting.</h1>
+          <p>
+            DropShare is a lightweight file and text sharing tool that helps you send files, messages, and links instantly across devices. Open a chat session, share content in seconds, and access it from almost any browser.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" id="download" href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
+            <a class="btn btn-secondary" href="#features">Explore Features</a>
+          </div>
+          <div class="hero-points">
+            <span>No login required in many local sharing scenarios</span>
+            <span>Browser-friendly access</span>
+            <span>HTTP / WebDAV / FTP / SFTP</span>
+          </div>
+        </div>
+
+        <aside class="mock-card" aria-label="DropShare preview">
+          <div class="window">
+            <div class="window-top">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="chat-ui">
+              <div class="bubble left">Hi! Need to send a document to another device?</div>
+              <div class="file-bubble">📄 ProjectPlan.pdf · Ready to share</div>
+              <div class="bubble right">Sent. Open the link in any browser.</div>
+              <div class="bubble left">Also supports text, links, images, and videos.</div>
+              <div class="bubble right">HTTP, WebDAV, FTP, and SFTP are available too.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="sections">
+      <section class="section" id="showcase">
+        <div class="container showcase-grid">
+          <div class="card promo-card">
+            <h2 class="section-title">Official promo image</h2>
+            <p class="section-sub">A quick visual overview of DropShare's chat-based sharing flow, multi-protocol access, and browser-friendly experience.</p>
+            <div class="promo-frame">
+              <img src="images/img_dropshare.png" alt="DropShare official promo image" />
+            </div>
+            <div class="promo-caption">
+              <div>
+                <strong>One app, multiple ways to share</strong>
+                <p>Use the app for instant file and text transfer, then let receivers open content through a browser or protocols such as HTTP, WebDAV, FTP, and SFTP.</p>
+              </div>
+              <div class="protocols" aria-label="Showcase highlights">
+                <span class="tag">Chat UI</span>
+                <span class="tag">Browser Access</span>
+                <span class="tag">Cross-device</span>
+                <span class="tag">Multi-protocol</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="screenshots-head">
+              <div>
+                <h2 class="section-title">App screenshots</h2>
+                <p class="section-sub">Core screens from the Android app, covering chat-based sharing, content management, and connection workflows.</p>
+              </div>
+            </div>
+            <div class="screenshots-rail" aria-label="DropShare app screenshots">
+              <figure class="shot-card">
+                <img src="images/Screen1.png" alt="DropShare app screenshot 1" loading="lazy" />
+                <span>Start sharing in one tap</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/Screen2.png" alt="DropShare app screenshot 2" loading="lazy" />
+                <span>Connect with QR access</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/Screen3.png" alt="DropShare app screenshot 3" loading="lazy" />
+                <span>Tools and protocol setup</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/Screen4.png" alt="DropShare app screenshot 4" loading="lazy" />
+                <span>Enable WebDAV, FTP, SFTP</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/Screen5.png" alt="DropShare app screenshot 5" loading="lazy" />
+                <span>Chat with files and text</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/screen6.png" alt="DropShare app screenshot 6" loading="lazy" />
+                <span>Send from any browser</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/screen7.png" alt="DropShare app screenshot 7" loading="lazy" />
+                <span>Preview shared media instantly</span>
+              </figure>
+              <figure class="shot-card">
+                <img src="images/screen8.png" alt="DropShare app screenshot 8" loading="lazy" />
+                <span>Browse shared folders</span>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="container">
+          <h2 class="section-title">Why people use DropShare</h2>
+          <p class="section-sub">
+            DropShare focuses on fast, low-friction sharing. It blends a chat-style experience with practical file transfer tools, making it suitable for everyday sharing, local network access, and lightweight cross-device workflows.
+          </p>
+          <div class="grid-3">
+            <article class="card">
+              <div class="icon">💬</div>
+              <h3>Chat-based sharing</h3>
+              <p>Send files and text in a familiar conversation-style interface instead of dealing with complex transfer steps.</p>
+            </article>
+            <article class="card">
+              <div class="icon">🌐</div>
+              <h3>Works in a browser</h3>
+              <p>Receivers can open shared content from a browser, which lowers friction and improves compatibility across devices.</p>
+            </article>
+            <article class="card">
+              <div class="icon">⚡</div>
+              <h3>Fast and lightweight</h3>
+              <p>No heavy cloud setup is required for many scenarios, especially when sharing on a local network or hotspot.</p>
+            </article>
+            <article class="card">
+              <div class="icon">📁</div>
+              <h3>File and text transfer</h3>
+              <p>Share documents, photos, videos, plain text, and useful links from one simple workflow.</p>
+            </article>
+            <article class="card">
+              <div class="icon">🔗</div>
+              <h3>Simple access links</h3>
+              <p>Generate easy-to-open sharing links so another device can quickly view or download the content.</p>
+            </article>
+            <article class="card">
+              <div class="icon">🧩</div>
+              <h3>Built for practical use</h3>
+              <p>Good for quick personal transfers, temporary local sharing, and more advanced technical access methods.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="protocols">
+        <div class="container grid-2">
+          <div class="card">
+            <h2 class="section-title" style="margin-top:0;">Multiple transfer protocols</h2>
+            <p class="section-sub" style="margin-bottom:0;">
+              DropShare is more than a basic file sender. It supports multiple access methods so different users and devices can choose the workflow that suits them best.
+            </p>
+            <div class="protocols" aria-label="Supported protocols">
+              <span class="tag">HTTP File Server</span>
+              <span class="tag">WebDAV Access</span>
+              <span class="tag">FTP Server</span>
+              <span class="tag">SFTP Support</span>
+              <span class="tag">Chat-based Sharing</span>
+              <span class="tag">Browser Access</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Designed for both simple and advanced use</h3>
             <p>
-                DropShare is an Android app designed for fast, simple, and private file sharing on your local network.
-                It helps you move files between your phone, tablet, and computer without relying on cloud uploads.
+              Everyday users can simply open a chat and share files. Advanced users can take advantage of HTTP, WebDAV, FTP, and SFTP access for broader compatibility, file management, and local network workflows.
             </p>
-            <p>
-                With DropShare, you can browse files from a web browser, share content across devices on the same network,
-                and keep control of access with flexible server and permission settings.
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="container grid-2">
+          <div>
+            <h2 class="section-title">How DropShare works</h2>
+            <p class="section-sub">The workflow is intentionally simple so you can move content between devices without unnecessary setup.</p>
+            <div class="steps">
+              <div class="step">
+                <div>
+                  <h3>Start a sharing session</h3>
+                  <p>Create a chat or start a sharing mode in the app, depending on how you want to transfer content.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h3>Send files, text, or links</h3>
+                  <p>Select the content you want to share and make it available instantly through the chat-style interface or supported protocol.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h3>Open it from another device</h3>
+                  <p>Use the generated link or supported transfer method to view, download, or manage the shared content from another device.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Ideal use cases</h3>
+            <p style="margin-bottom: 14px;">
+              DropShare can be useful for local file transfer, quick browser-based downloads, sharing notes between devices, lightweight team exchange, and technical access scenarios that benefit from WebDAV, FTP, or SFTP.
             </p>
+            <div class="protocols">
+              <span class="tag">Phone ↔ Phone</span>
+              <span class="tag">Phone ↔ PC</span>
+              <span class="tag">Local hotspot</span>
+              <span class="tag">LAN sharing</span>
+              <span class="tag">Browser receiving</span>
+              <span class="tag">Temporary file access</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <ul class="features">
-                <li>Fast local file transfer between Android devices and desktop browsers</li>
-                <li>Built-in web access for easy downloads and uploads</li>
-                <li>Flexible sharing controls, permissions, and server options</li>
-                <li>Simple setup for everyday file exchange at home, work, or school</li>
-            </ul>
+      <section class="section faq" id="faq">
+        <div class="container">
+          <h2 class="section-title">Frequently asked questions</h2>
+          <p class="section-sub">These questions also help search engines better understand what DropShare offers.</p>
 
-            <a class="cta" href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">
-                Download on Google Play
-            </a>
+          <details>
+            <summary>What is DropShare?</summary>
+            <p>DropShare is a chat-based file and text sharing tool for transferring files, messages, and links across devices with browser support and multiple access protocols.</p>
+          </details>
 
-            <p class="note">
-                Google Play: https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop
-            </p>
-        </section>
-    </main>
+          <details>
+            <summary>Can I share files with just a browser on the receiving side?</summary>
+            <p>Yes. One of the main ideas behind DropShare is reducing friction for the receiving side. In many cases, the receiver only needs a browser to access shared content.</p>
+          </details>
+
+          <details>
+            <summary>Does DropShare support WebDAV, FTP, or SFTP?</summary>
+            <p>Yes. DropShare supports multiple file access methods including HTTP, WebDAV, FTP, and SFTP, making it useful for both casual and advanced workflows.</p>
+          </details>
+
+          <details>
+            <summary>Is DropShare useful for local network sharing?</summary>
+            <p>Yes. DropShare is well suited for local network and hotspot-based sharing scenarios where quick and lightweight transfer matters.</p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>DropShare</strong><br />
+        Chat-Based File &amp; Text Sharing Tool
+      </div>
+      <div>
+        <a href="https://play.google.com/store/apps/details?id=com.cxxjava.chatdrop" target="_blank" rel="noopener noreferrer">Google Play</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/app-ads.txt">app-ads.txt</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
